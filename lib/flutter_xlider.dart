@@ -440,6 +440,8 @@ class _FlutterSliderState extends State<FlutterSlider>
                 curve: Curves.fastOutSlowIn));
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+
       _renderBoxInitialization();
 
       _arrangeHandlersPosition();
@@ -2731,4 +2733,5 @@ class FlutterSliderRangeStep {
 }
 
 enum FlutterSliderTooltipDirection { top, left, right }
+
 enum FlutterSliderHatchMarkAlignment { left, right }
