@@ -12,7 +12,127 @@ class MyApp extends StatelessWidget {
         //
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Xlider Demo'),
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  const MyWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: FlutterSlider(
+          height: 200,
+          handler: FlutterSliderHandler(
+            child: Icon(Icons.abc),
+          ),
+          values: [2],
+          max: 4,
+          min: 0,
+          selectByTap: true,
+          touchSize: 40,
+          onDragging: (handlerIndex, lowerValue, upperValue) {},
+          hatchMark: FlutterSliderHatchMark(
+            labelsDistanceFromTrackBar: 60,
+            density: 2,
+            labels: [
+              FlutterSliderHatchMarkLabel(
+                percent: 4,
+                label: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _SliderMark(),
+                    Text('6M'),
+                  ],
+                ),
+              ),
+              FlutterSliderHatchMarkLabel(
+                percent: 25,
+                label: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _SliderMark(),
+                    Text('1Y'),
+                  ],
+                ),
+              ),
+              FlutterSliderHatchMarkLabel(
+                percent: 50,
+                label: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _SliderMark(),
+                    Text('3Y'),
+                  ],
+                ),
+              ),
+              FlutterSliderHatchMarkLabel(
+                percent: 75,
+                label: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _SliderMark(),
+                    Text('5Y'),
+                  ],
+                ),
+              ),
+              FlutterSliderHatchMarkLabel(
+                percent: 98,
+                label: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _SliderMark(),
+                    Text('10Y+'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          trackBar: FlutterSliderTrackBar(
+            activeTrackBarHeight: 8,
+            inactiveTrackBarHeight: 8,
+            inactiveTrackBar: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              color: Color(0xFF232A38).withOpacity(.55),
+            ),
+            activeTrackBar: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF30A1F0),
+                  Color(0xFF2D6AD4),
+                ],
+              ),
+            ),
+          ),
+          axis: Axis.horizontal,
+          jump: true,
+        ),
+      ),
+    );
+  }
+}
+
+class _SliderMark extends StatelessWidget {
+  const _SliderMark({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 1.2,
+      height: 7,
+      color: Colors.red,
+      margin: const EdgeInsets.only(bottom: 5),
     );
   }
 }
@@ -233,7 +353,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 fixedValues: [
                   FlutterSliderFixedValue(percent: 0, value: "1000"),
                   FlutterSliderFixedValue(percent: 10, value: "10K"),
-                  FlutterSliderFixedValue(percent: 50, value: 50000),
+                  FlutterSliderFixedValue(percent: 50, value: '50000'),
                   FlutterSliderFixedValue(percent: 80, value: "80M"),
                   FlutterSliderFixedValue(percent: 100, value: "100B"),
                 ],

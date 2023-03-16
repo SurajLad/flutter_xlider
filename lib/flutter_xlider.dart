@@ -15,6 +15,7 @@ import 'dart:math';
 
 class FlutterSlider extends StatefulWidget {
   final Key? key;
+  final double? height;
   final Axis axis;
   final double? handlerWidth;
   final double? handlerHeight;
@@ -53,6 +54,7 @@ class FlutterSlider extends StatefulWidget {
 
   FlutterSlider(
       {this.key,
+      this.height,
       this.min,
       this.max,
       required this.values,
@@ -274,7 +276,7 @@ class _FlutterSliderState extends State<FlutterSlider>
             __containerSizeWithoutPadding = _containerHeightWithoutPadding;
             _containerWidth =
                 [(sliderProperSize! * 2), layoutWidth].reduce(min);
-            _containerHeight = constraints.maxHeight;
+            _containerHeight = widget.height ?? constraints.maxHeight;
           } else {
             double layoutHeight = constraints.maxHeight;
             if (layoutHeight == double.infinity) {
@@ -307,7 +309,7 @@ class _FlutterSliderState extends State<FlutterSlider>
 //                  ..._points,
               Container(
                 key: containerKey,
-                height: _containerHeight,
+                height: widget.height ?? _containerHeight,
                 width: _containerWidth,
                 child: Stack(
                   clipBehavior: Clip.none,
@@ -640,8 +642,15 @@ class _FlutterSliderState extends State<FlutterSlider>
           left = hatchMark.labelsDistanceFromTrackBar;
         }
 
-        _points.add(Positioned(
-            top: top, bottom: bottom, left: left, right: right, child: bar));
+        _points.add(
+          Positioned(
+            top: top,
+            bottom: bottom,
+            left: left,
+            right: right,
+            child: bar,
+          ),
+        );
       }
     }
   }
